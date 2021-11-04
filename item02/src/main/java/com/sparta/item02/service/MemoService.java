@@ -24,12 +24,12 @@ public class MemoService {
         Memo memo = new Memo(memoDto.getUsername(), memoDto.getContents());
         Memo savedMemo = memoRepository.save(memo);
 
-        return new MemoDto(savedMemo.getId(), savedMemo.getUsername(), savedMemo.getContents());
+        return memoDto.toDto(memo);
     }
 
     public List<MemoDto> getMemos() {
         return memoRepository.findAllByOrderByUpdatedAtDesc().stream()
-                .map(m -> new MemoDto(m.getId(), m.getUsername(), m.getContents()))
+                .map(m -> new MemoDto().toDto(m))
                 .collect(Collectors.toList());
     }
 
@@ -38,7 +38,7 @@ public class MemoService {
                 () -> new IllegalArgumentException("존재하지 않는 메모입니다.")
         );
 
-        return new MemoDto(findMemo.getId(), findMemo.getUsername(), findMemo.getContents());
+        return new MemoDto().toDto(findMemo);
     }
 
     @Transactional
