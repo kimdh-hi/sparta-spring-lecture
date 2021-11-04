@@ -28,7 +28,7 @@ public class MemoService {
     }
 
     public List<MemoDto> getMemos() {
-        return memoRepository.findAll().stream()
+        return memoRepository.findAllByOrderByUpdatedAtDesc().stream()
                 .map(m -> new MemoDto(m.getId(), m.getUsername(), m.getContents()))
                 .collect(Collectors.toList());
     }
