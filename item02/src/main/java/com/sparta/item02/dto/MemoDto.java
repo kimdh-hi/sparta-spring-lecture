@@ -12,14 +12,14 @@ import java.time.LocalDateTime;
 @Data
 public class MemoDto {
 
-    private Long memoId;
+    private Long id;
     private String username;
     private String contents;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public MemoDto(Long memoId, String username, String contents) {
-        this.memoId = memoId;
+    public MemoDto(Long id, String username, String contents) {
+        this.id = id;
         this.username = username;
         this.contents = contents;
     }
@@ -30,7 +30,7 @@ public class MemoDto {
     }
 
     public MemoDto toDto(Memo memo) {
-        this.memoId = memo.getId();
+        this.id = memo.getId();
         this.username = memo.getUsername();
         this.contents = memo.getContents();
         this.createdAt = memo.getCreatedAt();
